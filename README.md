@@ -1,6 +1,6 @@
 # 🧠 MentalHealthAI — AI-Powered Mental Health Support System
 
-A machine learning web app that predicts stress levels based on daily habits and provides empathetic AI support through Google Gemini — built with Streamlit.
+A robust full-stack web application that predicts stress levels based on daily habits, provides an empathetic AI support buddy powered by Google Gemini, offers interactive journaling, and presents a comprehensive manager dashboard for anonymized team wellbeing insights.
 
 > ⚠️ **Disclaimer:** This is a non-medical support tool only. It does not provide medical diagnosis or replace professional mental health care.
 
@@ -8,65 +8,71 @@ A machine learning web app that predicts stress levels based on daily habits and
 
 ## ✨ Features
 
-- 📊 **Stress Level Prediction** — predicts Low / Medium / High stress based on your daily habits
-- 🤖 **AI Chat Support** — powered by Google Gemini, gives empathetic responses tailored to your stress level
-- 🎛️ **Interactive Sliders** — input study hours, sleep, screen time, and exercise
-- ⚡ **Instant Results** — real-time prediction with personalised feedback
+- 🔒 **Secure User Authentication** — JWT-based authentication system with hashed passwords using SQLite to keep personal reflections fully private.
+- 📊 **Interactive Daily Check-In** — Input study hours, sleep, screen time, and exercise to instantly log and monitor your well-being.
+- 🤖 **AI Chat Support** — Powered by Google Gemini (`gemini-pro`), providing empathetic responses, memory summarization, and cognitive behavioral therapy (CBT) inspired coping tools based on user sentiment.
+- 📓 **Reflection Journal** — A private space to record thoughts and feelings securely.
+- 📈 **Manager Wellbeing Dashboard** — A specialized view that aggregates anonymized team check-in data, visualizes mood trends over the week, and utilizes AI to extract key stress themes affecting the team without compromising individual privacy.
+- 🛟 **Support Resources** — Dynamic integration of free, government-backed mental health helplines for immediate professional access.
 
 ---
 
-## 🖼️ How It Works
+## 🛠️ Tech Stack & Architecture
 
-```
-User inputs daily habits (sleep, study, screen time, exercise)
-        │
-        ▼
-Linear Regression model → predicts stress level (Low / Medium / High)
-        │
-        ▼
-User types how they're feeling
-        │
-        ▼
-Google Gemini API → empathetic response tailored to stress level
-```
+- **Frontend:** React, Vite, TailwindCSS (for dynamic, beautiful glass-morphic UI).
+- **Backend:** Flask (Python) exposing RESTful JSON APIs.
+- **Database:** SQLite (local, fully free, and zero-configuration).
+- **Authentication:** PyJWT & Werkzeug for robust token-based security and password hashing.
+- **AI Integrations:** Google Gemini (`google-generativeai`) for natural language conversational therapy, memory summarization, and team insights.
+- **Machine Learning:** `scikit-learn` for habit-to-stress level prediction models.
+
+*Note: All technologies used in this stack are open-source and **completely free**. The only external service is the Google Gemini API, which offers a free tier for testing and personal development.*
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Quick Start Guide
 
-### 1. Navigate into the project folder
+### 1. Repository Setup
 ```bash
-cd MentalHealthAI
+git clone https://github.com/Vedika478/MentalHealthAI_Project.git
+cd MentalHealthAI_Project/MentalHealthAI
 ```
 
-### 2. Install dependencies
+### 2. Backend Environment Configuration
+You need a free Google Gemini API key to power the AI features.
+1. Get a free API key at: https://aistudio.google.com/app/apikey
+2. Create a `.env` file inside the `MentalHealthAI` directory:
+```bash
+# MentalHealthAI/.env
+GEMINI_API_KEY=your_actual_key_here
+```
+*(Note: `.env` is ignored by Git to protect your secrets.)*
+
+### 3. Install Backend Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Add your Gemini API key
-
-Open the `.env` file and replace the placeholder:
-```
-GEMINI_API_KEY=your_actual_key_here
-```
-Get a free API key at: https://aistudio.google.com/app/apikey
-
-### 4. Train the model
+### 4. Start the Flask Backend Server
 ```bash
-python train.py
+python server.py
 ```
-This generates `model.pkl` and `scaler.pkl` in the project root.
+*The Flask server will initialise the SQLite database (`wellness.db`) automatically and run on `http://localhost:5000`.*
 
-### 5. Run the app
+### 5. Start the React Frontend
+Open a new terminal window and navigate to the frontend directory:
 ```bash
-streamlit run app/app.py
+cd MentalHealthAI/frontend
+npm install
+npm run dev
 ```
 
-### 6. Open in your browser
+### 6. Access the Application
+Open your browser and navigate to:
 ```
-http://localhost:8501
+http://localhost:5173
 ```
+Create a new secure account on the login page and start your wellness journey!
 
 ---
 
@@ -75,85 +81,29 @@ http://localhost:8501
 ```
 MentalHealthAI/
 │
-├── app/
-│   └── app.py              # Streamlit frontend + prediction logic
+├── frontend/               # React + Vite frontend application
+│   ├── src/                # UI Components (App.jsx, ChatView, ManagerView, etc.)
+│   └── package.json        # Node.js dependencies
 │
-├── chatbot/
-│   └── gemini.py           # Google Gemini AI chatbot integration
+├── chatbot/                
+│   ├── database.py         # SQLite CRUD operations & schema definitions
+│   └── gemini.py           # Google Gemini AI prompts and logic
 │
-├── train.py                # Trains the stress prediction model
-├── model.pkl               # Saved ML model (generated after train.py)
-├── scaler.pkl              # Saved scaler (generated after train.py)
+├── server.py               # Flask backend API with JWT middleware
+├── train.py                # Trains the linear regression model for stress prediction
+├── wellness.db             # Auto-generated SQLite database
 ├── requirements.txt        # Python dependencies
-├── .env                    # API key (never commit this to GitHub!)
-└── README.md
-```
-
----
-
-## 📊 Model
-
-The stress prediction model is a **Linear Regression** trained on 4 features:
-
-| Feature | Description |
-|---------|-------------|
-| `study_hours` | Daily hours spent studying |
-| `sleep_hours` | Hours of sleep per night |
-| `screen_time` | Daily screen time in hours |
-| `exercise_minutes` | Daily exercise in minutes |
-
-**Output:** Stress level — `0 = Low`, `1 = Medium`, `2 = High`
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| Frontend | Streamlit |
-| ML Model | scikit-learn (Linear Regression) |
-| AI Chatbot | Google Gemini API (`gemini-pro`) |
-| Data | pandas, numpy |
-| Config | python-dotenv |
-
----
-
-## 🔐 Environment Variables
-
-Create a `.env` file in the project root:
-```
-GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-> ⚠️ **Never push your `.env` file to GitHub.** Add it to `.gitignore`.
-
----
-
-## 📦 Requirements
-
-```
-numpy
-pandas
-scikit-learn
-streamlit
-python-dotenv
-google-generativeai
-```
-
-Install all with:
-```bash
-pip install -r requirements.txt
+└── .env                    # Secret API keys
 ```
 
 ---
 
 ## 🔮 Future Improvements
 
-- [ ] Larger, real-world training dataset for better predictions
-- [ ] Mood tracking over time with history charts
-- [ ] Multi-turn conversation memory for the chatbot
-- [ ] User login and personalised recommendations
-- [ ] Deploy to Streamlit Cloud
+- [ ] Multi-turn conversation memory for the chatbot across sessions.
+- [ ] Push notifications for daily check-in reminders.
+- [ ] Expanded Manager Dashboard with department-level filtering.
+- [ ] Docker containerization for easier cloud deployment.
 
 ---
 

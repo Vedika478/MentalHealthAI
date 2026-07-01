@@ -1,6 +1,9 @@
 numpy
 pandas
 scikit-learn
-streamlit
 python-dotenv
 google-generativeai
+flask
+flask-cors
+PyJWT
+werkzeug
