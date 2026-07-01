@@ -95,8 +95,9 @@ elif st.session_state.page == "home":
     """, unsafe_allow_html=True)
 
     # Load model
-    model = pickle.load(open("model.pkl", "rb"))
-    scaler = pickle.load(open("scaler.pkl", "rb"))
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model = pickle.load(open(os.path.join(base_dir, "model.pkl"), "rb"))
+    scaler = pickle.load(open(os.path.join(base_dir, "scaler.pkl"), "rb"))
 
     st.divider()
 
