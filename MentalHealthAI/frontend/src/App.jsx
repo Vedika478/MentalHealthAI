@@ -1200,8 +1200,14 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
 
   if (step === "login") {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-[#EAEDF3]" style={{ fontFamily: "Work Sans, sans-serif" }}>
+      <div className="w-full h-screen flex items-center justify-center bg-[#EAEDF3] relative" style={{ fontFamily: "Work Sans, sans-serif" }}>
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+        
+        {/* App Logo in Top-Left Corner */}
+        <div className="absolute top-6 left-6 flex items-center z-10">
+          <img src={logo} alt="Reflectra Logo" className="h-10 object-contain" />
+        </div>
+
         <div className="bg-white rounded-3xl border border-[#DDE1EC] shadow-sm p-8 max-w-md w-full text-center">
           <h1 className="text-2xl font-medium mb-2 text-[#333A4D]" style={{ fontFamily: "Fraunces, serif" }}>
             {isRegistering ? "Create an Account" : "Welcome Back"}
@@ -1323,10 +1329,15 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
           }
         `}</style>
 
+        {/* App Logo in Top-Left Corner */}
+        <div className="absolute top-8 left-8 flex items-center z-10">
+          <img src={logo} alt="Reflectra Logo" className="h-8 object-contain" />
+        </div>
+
         {/* Back Button */}
         <button 
           onClick={() => setStep("login")} 
-          className="absolute top-8 left-8 flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7C86A6] hover:text-[#333A4D] transition-all cursor-pointer z-10"
+          className="absolute top-8 right-8 flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7C86A6] hover:text-[#333A4D] transition-all cursor-pointer z-10"
           style={{ fontFamily: "IBM Plex Mono, monospace" }}
         >
           ← BACK
@@ -1383,10 +1394,15 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
       <div className="w-full h-screen overflow-y-auto relative flex items-center justify-center bg-[#EAEDF3] py-8" style={{ fontFamily: "Work Sans, sans-serif" }}>
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
+        {/* App Logo in Top-Left Corner */}
+        <div className="absolute top-8 left-8 flex items-center z-10">
+          <img src={logo} alt="Reflectra Logo" className="h-8 object-contain" />
+        </div>
+
         {/* Back Button */}
         <button 
           onClick={() => setStep("motivation")} 
-          className="absolute top-8 left-8 flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7C86A6] hover:text-[#333A4D] transition-all cursor-pointer z-10"
+          className="absolute top-8 right-8 flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7C86A6] hover:text-[#333A4D] transition-all cursor-pointer z-10"
           style={{ fontFamily: "IBM Plex Mono, monospace" }}
         >
           ← BACK
