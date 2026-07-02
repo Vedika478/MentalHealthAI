@@ -3,6 +3,162 @@ import { Lock, Send, Users, ShieldCheck, Sparkles, TrendingDown, BookHeart, Mess
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
 import logo from './assets/logo.png';
 
+// Intercept fetches to localhost:5000 if offline sandbox mode is active
+const originalFetch = window.fetch;
+window.fetch = async function (url, options) {
+  const urlString = typeof url === 'string' ? url : url.url;
+  
+  if (urlString.startsWith("http://localhost:5000")) {
+    const isOffline = localStorage.getItem("offline_mode") === "true";
+    if (isOffline) {
+      const path = urlString.replace("http://localhost:5000", "").split("?")[0];
+      const params = new URLSearchParams(urlString.split("?")[1] || "");
+      
+      const method = (options && options.method) || "GET";
+      const body = options && options.body ? JSON.parse(options.body) : {};
+
+      const jsonResponse = (data, status = 200) => {
+        return Promise.resolve(new Response(JSON.stringify(data), {
+          status,
+          headers: { 'Content-Type': 'application/json' }
+        }));
+      };
+
+      if (path === "/api/login" || path === "/api/register") {
+        const username = body.username || "Guest";
+        return jsonResponse({
+          token: "local-demo-token",
+          user: { id: "local-user", username, memory_summary: "You are exploring Reflectra in Offline Mode.", api_key_configured: false }
+        });
+      }
+
+      if (path === "/api/config") {
+        return jsonResponse({ api_key_configured: false });
+      }
+
+      if (path === "/api/chat") {
+        const msg = (body.message || "").toLowerCase();
+        let reply = "I'm here to support you. Let's take a deep breath together. 🌸";
+        let tool_id = "none";
+        
+        if (msg.includes("breathe") || msg.includes("breathing")) {
+          reply = "Let's try a Box Breathing exercise to help you relax. Focus on the breathing guide.";
+          tool_id = "box_breathing";
+        } else if (msg.includes("ground") || msg.includes("54321") || msg.includes("five")) {
+          reply = "Let's try the 5-4-3-2-1 grounding technique to reconnect with the present.";
+          tool_id = "grounding_54321";
+        } else if (msg.includes("reframe") || msg.includes("think") || msg.includes("negative")) {
+          reply = "Let's reframe some of these negative thoughts together. Follow the guide below.";
+          tool_id = "reframe_prompt";
+        } else if (msg.includes("stretch") || msg.includes("move") || msg.includes("body")) {
+          reply = "Let's do a quick micro-movement stretching session to release physical tension.";
+          tool_id = "micro_movement";
+        } else {
+          const replies = [
+            "It sounds like you've been carrying a lot. Remember to be kind to yourself. 🌿",
+            "Your well-being is important. What's one small thing you can do for yourself right now?",
+            "I hear you. It's completely valid to feel this way. 🌸",
+            "Let's focus on the present moment. Can you name 3 things you can see right now?",
+            "Thank you for sharing that with me. You are not alone. 💖"
+          ];
+          reply = replies[Math.floor(Math.random() * replies.length)];
+        }
+        
+        return jsonResponse({ reply, api_key_configured: false, tool_id });
+      }
+
+      if (path === "/api/journal") {
+        const localJournals = JSON.parse(localStorage.getItem("local_journals") || "[]");
+        if (method === "POST") {
+          const newEntry = {
+            id: Date.now(),
+            user_id: "local-user",
+            entry: body.entry,
+            date_created: new Date().toISOString()
+          };
+          localJournals.unshift(newEntry);
+          localStorage.setItem("local_journals", JSON.stringify(localJournals));
+          return jsonResponse({ success: true });
+        } else if (method === "DELETE") {
+          const entryId = Number(params.get("entry_id"));
+          const filtered = localJournals.filter(j => j.id !== entryId);
+          localStorage.setItem("local_journals", JSON.stringify(filtered));
+          return jsonResponse({ success: true });
+        } else {
+          return jsonResponse(localJournals);
+        }
+      }
+
+      if (path === "/api/mood") {
+        const localMoods = JSON.parse(localStorage.getItem("local_moods") || "[]");
+        localMoods.push({
+          user_id: "local-user",
+          mood: body.mood,
+          date_created: new Date().toISOString()
+        });
+        localStorage.setItem("local_moods", JSON.stringify(localMoods));
+        return jsonResponse({ success: true });
+      }
+
+      if (path === "/api/habits") {
+        const localHabits = JSON.parse(localStorage.getItem("local_habits") || "[]");
+        localHabits.push({
+          user_id: "local-user",
+          study: body.study,
+          sleep: body.sleep,
+          screen: body.screen,
+          exercise: body.exercise,
+          stress_level: body.stress_level,
+          date_created: new Date().toISOString()
+        });
+        localStorage.setItem("local_habits", JSON.stringify(localHabits));
+        return jsonResponse({ success: true });
+      }
+
+      if (path === "/api/resources") {
+        return jsonResponse([
+          { name: "National Mental Health Helpline", number: "1800-599-0019", description: "Free, confidential 24/7 mental health support helpline." },
+          { name: "Vandrevala Foundation Helpline", number: "+91-9999 666 555", description: "Providing free crisis intervention and counseling." },
+          { name: "AASRA Suicide Prevention", number: "+91-9820466726", description: "24-hour suicide prevention and emotional support helpline." }
+        ]);
+      }
+
+      if (path === "/api/manager/dashboard") {
+        const localHabits = JSON.parse(localStorage.getItem("local_habits") || "[]");
+        const activeUsers = 1;
+        const totalUsers = 1;
+        const avgThisWeek = localHabits.length > 0 ? (localHabits.reduce((acc, curr) => acc + curr.stress_level, 0) / localHabits.length).toFixed(1) : "0.5";
+        return jsonResponse({
+          active_users: activeUsers,
+          total_users: totalUsers,
+          avg_this_week: avgThisWeek,
+          avg_last_week: "1.2",
+          mood_data: [
+            { day: "Mon", avgStress: 1.0 },
+            { day: "Tue", avgStress: 1.2 },
+            { day: "Wed", avgStress: 0.8 },
+            { day: "Thu", avgStress: Number(avgThisWeek) },
+            { day: "Fri", avgStress: 0.9 }
+          ],
+          mood_breakdown: { Good: 3, Neutral: 2, Bad: 1 }
+        });
+      }
+
+      if (path === "/api/manager/insight") {
+        return jsonResponse({
+          insight: "Team is showing stable stress levels. Regular micro-breaks and physical exercise are keeping stress levels low. Ensure screen time remains balanced."
+        });
+      }
+
+      if (path === "/api/session/end") {
+        return jsonResponse({ success: true });
+      }
+    }
+  }
+  
+  return originalFetch(url, options);
+};
+
 /* ---------- Design tokens ----------
   --bg        #EAEDF3  dusty blue-lavender wash (the "waiting room" calm)
   --surface   #FFFFFF
@@ -1139,7 +1295,16 @@ export default function App() {
       }
     } catch (e) {
       console.error("Auth failed", e);
-      alert("Authentication failed. Please make sure the backend is running.");
+      const confirmDemo = window.confirm(
+        "Could not connect to the backend server (authentication requires a running backend).\n\n" +
+        "Would you like to enter 'Offline Sandbox / Demo Mode' instead? (Your journal entries, check-ins, and settings will be stored locally in your browser!)"
+      );
+      if (confirmDemo) {
+        localStorage.setItem("offline_mode", "true");
+        localStorage.setItem("token", "local-demo-token");
+        setUserId("local-user");
+        setStep("motivation");
+      }
     }
   };
 
@@ -1301,11 +1466,27 @@ export default function App() {
               className="w-full px-4 py-3 rounded-xl border border-[#DDE1EC] outline-none focus:border-[#7C86A6] text-[#333A4D] transition-all bg-[#F8F9FA]"
             />
           </div>
-          <button
+           <button
             onClick={handleAuth}
-            className="w-full py-3 rounded-full bg-[#7C86A6] text-white font-medium hover:bg-[#68718F] transition-all cursor-pointer shadow-sm active:scale-98 mb-4"
+            className="w-full py-3 rounded-full bg-[#7C86A6] text-white font-medium hover:bg-[#68718F] transition-all cursor-pointer shadow-sm active:scale-98 mb-3"
           >
             {isRegistering ? "Sign Up" : "Sign In"}
+          </button>
+          
+          <button
+            type="button"
+            onClick={() => {
+              localStorage.setItem("offline_mode", "true");
+              localStorage.setItem("token", "local-demo-token");
+              setUserId("local-user");
+              if (!username.trim()) {
+                setUsername("Guest");
+              }
+              setStep("motivation");
+            }}
+            className="w-full py-3 rounded-full border border-dashed border-[#7C86A6] text-[#7C86A6] font-medium hover:bg-[#F3F4F8] transition-all cursor-pointer mb-4"
+          >
+            Try Offline Sandbox Mode
           </button>
           <p className="text-sm text-[#7C86A6]">
             {isRegistering ? "Already have an account?" : "Don't have an account?"}{" "}
