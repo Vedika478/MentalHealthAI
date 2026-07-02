@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Lock, Send, Users, ShieldCheck, Sparkles, TrendingDown, BookHeart, MessageCircle, Plus } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip } from "recharts";
+import logo from './assets/logo.png';
 
 /* ---------- Design tokens ----------
   --bg        #EAEDF3  dusty blue-lavender wash (the "waiting room" calm)
@@ -1077,7 +1078,7 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
   const [exercise, setExercise] = useState(1);
   const [mood, setMood] = useState(null);
   const [view, setView] = useState("chat");
-  const [buddyName, setBuddyName] = useState("Panda Buddy");
+  const [buddyName, setBuddyName] = useState("Reflectra");
   const [journalEntries, setJournalEntries] = useState([]);
   const [apiKeyConfigured, setApiKeyConfigured] = useState(true);
 
@@ -1238,7 +1239,7 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
               type="text"
               value={buddyName}
               onChange={(e) => setBuddyName(e.target.value)}
-              placeholder="e.g. Panda Buddy"
+              placeholder="e.g. Reflectra"
               className="w-full px-4 py-3 rounded-xl border border-[#DDE1EC] outline-none focus:border-[#7C86A6] text-[#333A4D] transition-all bg-[#F8F9FA]"
             />
           </div>
@@ -1463,22 +1464,9 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
             ← BACK TO HABITS
           </button>
 
-          {/* Logo / Header with Rename Input */}
-          <div className="flex items-center gap-3 mb-10 mt-2">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl bg-[#DDE1EC]">
-              🐼
-            </div>
-            <div className="group relative">
-              <input
-                type="text"
-                value={buddyName}
-                onChange={(e) => setBuddyName(e.target.value)}
-                placeholder="Panda Buddy"
-                className="text-base font-semibold tracking-tight outline-none border-b border-transparent hover:border-gray-200 focus:border-[#7C86A6] text-[#333A4D] w-36 bg-transparent transition-all"
-                style={{ fontFamily: "Fraunces, serif" }}
-              />
-              <p className="text-[9px] text-[#7C86A6] opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-4 left-0">Rename Companion</p>
-            </div>
+          {/* App Logo */}
+          <div className="flex justify-center mb-8 mt-2">
+            <img src={logo} alt="Reflectra Logo" className="w-3/4 max-w-[160px] object-contain" />
           </div>
 
           {/* Navigation Links */}
