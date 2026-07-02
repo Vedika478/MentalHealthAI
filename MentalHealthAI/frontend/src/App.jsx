@@ -1066,7 +1066,8 @@ function ManagerView() {
 }
 
 export default function App() {
-const [step, setStep] = useState("login"); // login -> motivation -> checkin -> dashboard
+  const [showSplash, setShowSplash] = useState(true);
+  const [step, setStep] = useState("login"); // login -> motivation -> checkin -> dashboard
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isRegistering, setIsRegistering] = useState(false);
@@ -1081,6 +1082,13 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
   const [buddyName, setBuddyName] = useState("Panda Buddy");
   const [journalEntries, setJournalEntries] = useState([]);
   const [apiKeyConfigured, setApiKeyConfigured] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const tabs = [
     { key: "chat", label: "Chat Support", icon: MessageCircle },
@@ -1197,6 +1205,50 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
 
   // Capitalize name safely
   const displayName = username ? username.charAt(0).toUpperCase() + username.slice(1) : "";
+
+  if (showSplash) {
+    return (
+      <div className="w-full h-screen flex flex-col items-center justify-center bg-[#EAEDF3] overflow-hidden" style={{ fontFamily: "Work Sans, sans-serif" }}>
+        <style>{`
+          @keyframes floatLogo {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-15px);
+            }
+          }
+          @keyframes spinLogo {
+            0% {
+              transform: translateY(0) rotate(0deg);
+            }
+            30% {
+              transform: translateY(-15px) rotate(0deg);
+            }
+            70% {
+              transform: translateY(-15px) rotate(360deg);
+            }
+            100% {
+              transform: translateY(0) rotate(360deg);
+            }
+          }
+          @keyframes fadeOutSplash {
+            from { opacity: 1; }
+            to { opacity: 0; }
+          }
+          .animate-splash-logo {
+            animation: spinLogo 2.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+          }
+          .animate-splash-screen {
+            animation: fadeOutSplash 0.5s ease-out 2.5s forwards;
+          }
+        `}</style>
+        <div className="flex flex-col items-center justify-center animate-splash-screen">
+          <img src={logo} alt="Reflectra Logo" className="w-48 h-auto object-contain animate-splash-logo" />
+        </div>
+      </div>
+    );
+  }
 
   if (step === "login") {
     return (
