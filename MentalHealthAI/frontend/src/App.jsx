@@ -1424,9 +1424,9 @@ export default function App() {
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         {/* App Logo & Name in Top-Left Corner */}
-        <div className="absolute top-8 left-8 flex items-center gap-4 z-10 dimensional-badge-wrapper">
-          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
-          <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
+        <div className="absolute top-8 left-8 flex items-center gap-6 z-10 dimensional-badge-wrapper">
+          <img src={logo} alt="Reflectra Logo" className="h-18 w-18 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
+          <span className="text-base font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
         </div>
 
         <div className="bg-white rounded-3xl border border-[#DDE1EC] shadow-sm p-8 max-w-md w-full text-center">
@@ -1567,9 +1567,9 @@ export default function App() {
         `}</style>
 
         {/* App Logo in Top-Left Corner */}
-        <div className="absolute top-8 left-8 flex items-center z-10 dimensional-badge-wrapper gap-4">
-          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
-          <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none">Reflectra</span>
+        <div className="absolute top-8 left-8 flex items-center z-10 dimensional-badge-wrapper gap-6">
+          <img src={logo} alt="Reflectra Logo" className="h-16 w-16 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
+          <span className="text-base font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none">Reflectra</span>
         </div>
 
         {/* Right side container with Back button */}
@@ -1634,9 +1634,9 @@ export default function App() {
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         {/* App Logo & Name in Top-Left Corner */}
-        <div className="absolute top-8 left-8 flex items-center gap-4 z-10 dimensional-badge-wrapper">
-          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
-          <span className="text-xs font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
+        <div className="absolute top-8 left-8 flex items-center gap-6 z-10 dimensional-badge-wrapper">
+          <img src={logo} alt="Reflectra Logo" className="h-16 w-16 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
+          <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
         </div>
   
         {/* Back Button */}
@@ -1721,8 +1721,8 @@ export default function App() {
           </button>
 
           {/* App Logo & Name */}
-          <div className="flex items-center gap-4 justify-center mb-6 mt-2 dimensional-badge-sidebar">
-            <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
+          <div className="flex items-center gap-6 justify-center mb-6 mt-2 dimensional-badge-sidebar">
+            <img src={logo} alt="Reflectra Logo" className="h-16 w-16 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
             <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
           </div>
 
