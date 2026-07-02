@@ -1411,7 +1411,7 @@ export default function App() {
         `}</style>
         <div className="flex flex-col items-center justify-center animate-splash-screen">
           <div className="dimensional-logo-wrapper animate-splash-logo">
-            <img src={logo} alt="Reflectra Logo" className="w-72 h-auto object-contain scale-[1.4] dimensional-logo" />
+            <img src={logo} alt="Reflectra Logo" className="w-64 h-auto object-contain rounded-2xl border border-[#DDE1EC]/20 shadow-md dimensional-logo" />
           </div>
         </div>
       </div>
@@ -1424,8 +1424,8 @@ export default function App() {
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         {/* App Logo & Name in Top-Left Corner */}
-        <div className="absolute top-8 left-8 flex items-center gap-3.5 z-10 dimensional-badge-wrapper">
-          <img src={logo} alt="Reflectra Logo" className="h-14 w-14 object-contain scale-[1.5] dimensional-logo-sm" />
+        <div className="absolute top-8 left-8 flex items-center gap-4 z-10 dimensional-badge-wrapper">
+          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
           <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
         </div>
 
@@ -1567,8 +1567,8 @@ export default function App() {
         `}</style>
 
         {/* App Logo in Top-Left Corner */}
-        <div className="absolute top-8 left-8 flex items-center z-10 dimensional-badge-wrapper gap-3">
-          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain scale-[1.5] dimensional-logo-sm" />
+        <div className="absolute top-8 left-8 flex items-center z-10 dimensional-badge-wrapper gap-4">
+          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
           <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none">Reflectra</span>
         </div>
 
@@ -1634,8 +1634,8 @@ export default function App() {
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         {/* App Logo & Name in Top-Left Corner */}
-        <div className="absolute top-8 left-8 flex items-center gap-3 z-10 dimensional-badge-wrapper">
-          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain scale-[1.5] dimensional-logo-sm" />
+        <div className="absolute top-8 left-8 flex items-center gap-4 z-10 dimensional-badge-wrapper">
+          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
           <span className="text-xs font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
         </div>
   
@@ -1721,8 +1721,8 @@ export default function App() {
           </button>
 
           {/* App Logo & Name */}
-          <div className="flex items-center gap-3.5 justify-center mb-6 mt-2 dimensional-badge-sidebar">
-            <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain scale-[1.5] dimensional-logo-sm" />
+          <div className="flex items-center gap-4 justify-center mb-6 mt-2 dimensional-badge-sidebar">
+            <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain rounded-xl border border-[#DDE1EC] shadow-sm dimensional-logo-sm" />
             <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
           </div>
 
