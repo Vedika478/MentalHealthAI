@@ -1274,6 +1274,7 @@ export default function App() {
 
   const handleAuth = async () => {
     if (!username.trim() || !password) return;
+    localStorage.setItem("offline_mode", "false"); // Disable offline mode interceptor for online requests
     try {
       const endpoint = isRegistering ? "/api/register" : "/api/login";
       const res = await fetch(`http://localhost:5000${endpoint}`, {
@@ -1410,7 +1411,7 @@ export default function App() {
         `}</style>
         <div className="flex flex-col items-center justify-center animate-splash-screen">
           <div className="dimensional-logo-wrapper animate-splash-logo">
-            <img src={logo} alt="Reflectra Logo" className="w-48 h-auto object-contain dimensional-logo" />
+            <img src={logo} alt="Reflectra Logo" className="w-72 h-auto object-contain scale-[1.4] dimensional-logo" />
           </div>
         </div>
       </div>
@@ -1424,7 +1425,7 @@ export default function App() {
         
         {/* App Logo & Name in Top-Left Corner */}
         <div className="absolute top-8 left-8 flex items-center gap-3.5 z-10 dimensional-badge-wrapper">
-          <img src={logo} alt="Reflectra Logo" className="h-10 object-contain dimensional-logo-sm" />
+          <img src={logo} alt="Reflectra Logo" className="h-14 w-14 object-contain scale-[1.5] dimensional-logo-sm" />
           <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
         </div>
 
@@ -1567,7 +1568,7 @@ export default function App() {
 
         {/* App Logo in Top-Left Corner */}
         <div className="absolute top-8 left-8 flex items-center z-10 dimensional-badge-wrapper gap-3">
-          <img src={logo} alt="Reflectra Logo" className="h-10 object-contain dimensional-logo-sm" />
+          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain scale-[1.5] dimensional-logo-sm" />
           <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none">Reflectra</span>
         </div>
 
@@ -1634,7 +1635,7 @@ export default function App() {
         
         {/* App Logo & Name in Top-Left Corner */}
         <div className="absolute top-8 left-8 flex items-center gap-3 z-10 dimensional-badge-wrapper">
-          <img src={logo} alt="Reflectra Logo" className="h-8 object-contain dimensional-logo-sm" />
+          <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain scale-[1.5] dimensional-logo-sm" />
           <span className="text-xs font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
         </div>
   
@@ -1721,7 +1722,7 @@ export default function App() {
 
           {/* App Logo & Name */}
           <div className="flex items-center gap-3.5 justify-center mb-6 mt-2 dimensional-badge-sidebar">
-            <img src={logo} alt="Reflectra Logo" className="h-8 object-contain dimensional-logo-sm" />
+            <img src={logo} alt="Reflectra Logo" className="h-12 w-12 object-contain scale-[1.5] dimensional-logo-sm" />
             <span className="text-sm font-bold tracking-[0.15em] text-[#333A4D] uppercase select-none" style={{ fontFamily: "Work Sans, sans-serif" }}>Reflectra</span>
           </div>
 
