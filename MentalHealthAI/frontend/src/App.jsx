@@ -1078,7 +1078,7 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
   const [exercise, setExercise] = useState(1);
   const [mood, setMood] = useState(null);
   const [view, setView] = useState("chat");
-  const [buddyName, setBuddyName] = useState("Reflectra");
+  const [buddyName, setBuddyName] = useState("Panda Buddy");
   const [journalEntries, setJournalEntries] = useState([]);
   const [apiKeyConfigured, setApiKeyConfigured] = useState(true);
 
@@ -1239,7 +1239,7 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
               type="text"
               value={buddyName}
               onChange={(e) => setBuddyName(e.target.value)}
-              placeholder="e.g. Reflectra"
+              placeholder="e.g. Panda Buddy"
               className="w-full px-4 py-3 rounded-xl border border-[#DDE1EC] outline-none focus:border-[#7C86A6] text-[#333A4D] transition-all bg-[#F8F9FA]"
             />
           </div>
@@ -1465,8 +1465,26 @@ const [step, setStep] = useState("login"); // login -> motivation -> checkin -> 
           </button>
 
           {/* App Logo */}
-          <div className="flex justify-center mb-8 mt-2">
+          <div className="flex justify-center mb-6 mt-2">
             <img src={logo} alt="Reflectra Logo" className="w-3/4 max-w-[160px] object-contain" />
+          </div>
+
+          {/* Companion Config (Panda Buddy) */}
+          <div className="flex items-center gap-3 mb-6 px-2">
+            <div className="w-8 h-8 rounded-full flex items-center justify-center text-lg bg-[#DDE1EC] shrink-0">
+              🐼
+            </div>
+            <div className="group relative">
+              <input
+                type="text"
+                value={buddyName}
+                onChange={(e) => setBuddyName(e.target.value)}
+                placeholder="Panda Buddy"
+                className="text-sm font-semibold tracking-tight outline-none border-b border-transparent hover:border-gray-200 focus:border-[#7C86A6] text-[#333A4D] w-32 bg-transparent transition-all"
+                style={{ fontFamily: "Fraunces, serif" }}
+              />
+              <p className="text-[9px] text-[#7C86A6] opacity-0 group-hover:opacity-100 transition-opacity absolute -bottom-4 left-0">Rename Companion</p>
+            </div>
           </div>
 
           {/* Navigation Links */}
