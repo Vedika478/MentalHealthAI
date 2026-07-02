@@ -695,7 +695,8 @@ function ChatView({ initialMood, username, stressText, userId, stressLevel, memo
             <p className="text-xs text-[#7C86A6]">Here whenever you need to talk</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[#7C86A6] uppercase select-none" style={{ fontFamily: "IBM Plex Mono, monospace" }}>Reflectra</span>
           <span className="text-xs px-2.5 py-1 rounded-full border border-[#DDE1EC] text-[#7C86A6]" style={{ fontFamily: "IBM Plex Mono, monospace" }}>
             Stress: {stressText}
           </span>
@@ -858,8 +859,11 @@ function JournalView({ userId, entries, setEntries, mood, setMood }) {
             </div>
             <p className="text-xs text-[#7C86A6]">Private notes and mood logs, just for you.</p>
           </div>
-          <div className="hidden sm:flex w-10 h-10 rounded-full bg-white border border-[#DDE1EC] items-center justify-center text-sm shadow-sm select-none">
-            ✨
+          <div className="hidden sm:flex items-center gap-4 select-none">
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#7C86A6] uppercase" style={{ fontFamily: "IBM Plex Mono, monospace" }}>Reflectra</span>
+            <div className="w-10 h-10 rounded-full bg-white border border-[#DDE1EC] flex items-center justify-center text-sm shadow-sm">
+              ✨
+            </div>
           </div>
         </div>
 
@@ -1009,6 +1013,20 @@ function ResourcesView() {
     <div className="h-full overflow-y-auto px-8 py-8 bg-gradient-to-br from-[#EAEDF3] via-[#F1F3F8] to-[#E5E9F3] scrollbar-thin">
       <div className="max-w-4xl mx-auto space-y-6">
         
+        {/* Title Block */}
+        <div className="flex items-center justify-between pb-3 border-b border-[#DDE1EC]">
+          <div>
+            <h2 className="text-2xl font-semibold text-[#333A4D]" style={{ fontFamily: "Fraunces, serif" }}>Support Resources</h2>
+            <p className="text-xs text-[#7C86A6]">Free, confidential local support systems and hotlines.</p>
+          </div>
+          <div className="hidden sm:flex items-center gap-4 select-none">
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#7C86A6] uppercase" style={{ fontFamily: "IBM Plex Mono, monospace" }}>Reflectra</span>
+            <div className="w-10 h-10 rounded-full bg-white border border-[#DDE1EC] flex items-center justify-center text-sm shadow-sm">
+              🤍
+            </div>
+          </div>
+        </div>
+
         {/* Support Header Card */}
         <div className="bg-gradient-to-br from-[#A79BC9] to-[#7C86A6] text-white rounded-[32px] p-8 shadow-md border border-[#DDE1EC]/20 relative overflow-hidden">
           {/* Decorative aura */}
@@ -1135,8 +1153,11 @@ function ManagerView() {
             </div>
             <p className="text-xs text-[#7C86A6]">Aggregated across team members. No individual data is ever shown.</p>
           </div>
-          <div className="hidden sm:flex w-10 h-10 rounded-full bg-white border border-[#DDE1EC] items-center justify-center text-sm shadow-sm select-none">
-            📊
+          <div className="hidden sm:flex items-center gap-4 select-none">
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#7C86A6] uppercase" style={{ fontFamily: "IBM Plex Mono, monospace" }}>Reflectra</span>
+            <div className="w-10 h-10 rounded-full bg-white border border-[#DDE1EC] flex items-center justify-center text-sm shadow-sm">
+              📊
+            </div>
           </div>
         </div>
 
@@ -1409,7 +1430,9 @@ export default function App() {
           }
         `}</style>
         <div className="flex flex-col items-center justify-center animate-splash-screen">
-          <img src={logo} alt="Reflectra Logo" className="w-48 h-auto object-contain animate-splash-logo" />
+          <div className="dimensional-logo-wrapper animate-splash-logo">
+            <img src={logo} alt="Reflectra Logo" className="w-48 h-auto object-contain dimensional-logo" />
+          </div>
         </div>
       </div>
     );
@@ -1421,8 +1444,13 @@ export default function App() {
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         {/* App Logo in Top-Left Corner */}
-        <div className="absolute top-6 left-6 flex items-center z-10">
-          <img src={logo} alt="Reflectra Logo" className="h-10 object-contain" />
+        <div className="absolute top-8 left-8 flex items-center z-10 dimensional-badge-wrapper">
+          <img src={logo} alt="Reflectra Logo" className="h-6 object-contain dimensional-logo-sm" />
+        </div>
+  
+        {/* Right side container with App Name */}
+        <div className="absolute top-8 right-8 flex items-center z-10" style={{ fontFamily: "IBM Plex Mono, monospace" }}>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[#7C86A6] uppercase select-none">Reflectra</span>
         </div>
 
         <div className="bg-white rounded-3xl border border-[#DDE1EC] shadow-sm p-8 max-w-md w-full text-center">
@@ -1563,18 +1591,20 @@ export default function App() {
         `}</style>
 
         {/* App Logo in Top-Left Corner */}
-        <div className="absolute top-8 left-8 flex items-center z-10">
-          <img src={logo} alt="Reflectra Logo" className="h-8 object-contain" />
+        <div className="absolute top-8 left-8 flex items-center z-10 dimensional-badge-wrapper">
+          <img src={logo} alt="Reflectra Logo" className="h-6 object-contain dimensional-logo-sm" />
         </div>
 
-        {/* Back Button */}
-        <button 
-          onClick={() => setStep("login")} 
-          className="absolute top-8 right-8 flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7C86A6] hover:text-[#333A4D] transition-all cursor-pointer z-10"
-          style={{ fontFamily: "IBM Plex Mono, monospace" }}
-        >
-          ← BACK
-        </button>
+        {/* Right side container with App Name and Back button */}
+        <div className="absolute top-8 right-8 flex items-center gap-6 z-10" style={{ fontFamily: "IBM Plex Mono, monospace" }}>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[#7C86A6] uppercase select-none">Reflectra</span>
+          <button 
+            onClick={() => setStep("login")} 
+            className="flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7C86A6] hover:text-[#333A4D] transition-all cursor-pointer"
+          >
+            ← BACK
+          </button>
+        </div>
 
         {/* Breathing ambient background blob */}
         <div className="absolute w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-[#A79BC9] to-[#7C86A6] bg-breathe-blob pointer-events-none" />
@@ -1628,18 +1658,20 @@ export default function App() {
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
         
         {/* App Logo in Top-Left Corner */}
-        <div className="absolute top-8 left-8 flex items-center z-10">
-          <img src={logo} alt="Reflectra Logo" className="h-8 object-contain" />
+        <div className="absolute top-8 left-8 flex items-center z-10 dimensional-badge-wrapper">
+          <img src={logo} alt="Reflectra Logo" className="h-6 object-contain dimensional-logo-sm" />
         </div>
-
-        {/* Back Button */}
-        <button 
-          onClick={() => setStep("motivation")} 
-          className="absolute top-8 right-8 flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7C86A6] hover:text-[#333A4D] transition-all cursor-pointer z-10"
-          style={{ fontFamily: "IBM Plex Mono, monospace" }}
-        >
-          ← BACK
-        </button>
+  
+        {/* Right side container with App Name and Back button */}
+        <div className="absolute top-8 right-8 flex items-center gap-6 z-10" style={{ fontFamily: "IBM Plex Mono, monospace" }}>
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[#7C86A6] uppercase select-none">Reflectra</span>
+          <button 
+            onClick={() => setStep("motivation")} 
+            className="flex items-center gap-2 text-xs font-semibold tracking-wider text-[#7C86A6] hover:text-[#333A4D] transition-all cursor-pointer"
+          >
+            ← BACK
+          </button>
+        </div>
 
         <div className="bg-white rounded-3xl border border-[#DDE1EC] shadow-sm p-8 max-w-xl w-full space-y-6 z-0">
           <div className="text-center">
@@ -1714,8 +1746,8 @@ export default function App() {
           </button>
 
           {/* App Logo */}
-          <div className="flex justify-center mb-6 mt-2">
-            <img src={logo} alt="Reflectra Logo" className="w-3/4 max-w-[160px] object-contain" />
+          <div className="flex justify-center mb-6 mt-2 dimensional-badge-sidebar">
+            <img src={logo} alt="Reflectra Logo" className="w-3/4 max-w-[130px] object-contain dimensional-logo-sm" />
           </div>
 
           {/* Companion Config (Panda Buddy) */}

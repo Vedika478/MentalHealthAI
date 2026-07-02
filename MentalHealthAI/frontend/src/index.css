@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+/* Dimensional Branding & Logo Styles */
+.dimensional-logo-wrapper {
+  perspective: 800px;
+  display: inline-flex;
+}
+
+.dimensional-logo {
+  filter: drop-shadow(0 8px 16px rgba(124, 134, 166, 0.25)) 
+          drop-shadow(0 20px 45px rgba(124, 134, 166, 0.4)) 
+          contrast(1.05);
+  transform: rotateX(8deg) rotateY(-8deg);
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+}
+
+.dimensional-logo:hover {
+  transform: rotateX(0deg) rotateY(0deg) scale(1.05);
+  filter: drop-shadow(0 12px 24px rgba(124, 134, 166, 0.3)) 
+          drop-shadow(0 25px 55px rgba(124, 134, 166, 0.5)) 
+          contrast(1.08);
+}
+
+.dimensional-badge-wrapper {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.2) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    0 4px 10px rgba(124, 134, 166, 0.08),
+    0 8px 20px rgba(124, 134, 166, 0.12);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 8px 14px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dimensional-badge-wrapper:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 100%);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    0 8px 18px rgba(124, 134, 166, 0.15),
+    0 16px 36px rgba(124, 134, 166, 0.25);
+}
+
+.dimensional-logo-sm {
+  filter: drop-shadow(0 2px 4px rgba(124, 134, 166, 0.15)) drop-shadow(0 4px 8px rgba(124, 134, 166, 0.2));
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.dimensional-badge-wrapper:hover .dimensional-logo-sm {
+  transform: rotateY(10deg) scale(1.02);
+}
+
+.dimensional-badge-sidebar {
+  background: linear-gradient(135deg, rgba(250, 250, 252, 0.9) 0%, rgba(240, 243, 250, 0.5) 100%);
+  border: 1px solid rgba(221, 225, 236, 0.7);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.9),
+    0 4px 12px rgba(124, 134, 166, 0.05),
+    0 8px 24px rgba(124, 134, 166, 0.08);
+  border-radius: 20px;
+  padding: 12px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dimensional-badge-sidebar:hover {
+  transform: translateY(-2px) scale(1.01);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 247, 252, 0.6) 100%);
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.95),
+    0 6px 18px rgba(124, 134, 166, 0.08),
+    0 12px 32px rgba(124, 134, 166, 0.15);
+}
